@@ -1,6 +1,5 @@
 
 build-debug/
-vendor/qxmpp/*
 desktop.ini
 .DS_Store
 *~

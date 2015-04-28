@@ -1,0 +1,3 @@
+[submodule "qxmpp"]
+      path = vendor/qxmpp
+      url = git@github.com:qxmpp-project/qxmpp.git
