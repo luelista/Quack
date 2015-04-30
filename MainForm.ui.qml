@@ -20,22 +20,16 @@ Item {
         Item {
             id: item1
             width: 200
-            TabView {
-                currentIndex: 0
-                anchors.fill: parent
-                Tab {
-                    title: "Conversations"
-                    anchors.fill: parent
                     ListView {
                         id: listView1
                         interactive: true
                         anchors.fill: parent
                         width: 200; height: parent.height
                         focus: true
-                        highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+                        highlight: Rectangle { color: "lightsteelblue"; }
                         delegate: Item {
                             x: 5
-                            height: 40
+                            height: 50
                             width: parent.width
 
                             MouseArea {
@@ -48,6 +42,8 @@ Item {
                             Row {
                                 id: row1
                                 spacing: 10
+                                anchors.margins: 5
+                                anchors.fill: parent
                                 Rectangle {
                                     width: 40
                                     height: 40
@@ -64,20 +60,15 @@ Item {
                         model: ListModel {
                             ListElement {
                                 name: "Max Weller"
-                                colorCode: "blue"
+                                colorCode: "#99aa33"
                             }
                             ListElement {
                                 name: "asdfasdfasdfasdf"
-                                colorCode: "red"
+                                colorCode: "#3399aa"
                             }
                         }
                     }
                 }
-                Tab {
-                    title: "Contact list"
-                    Rectangle { color: "#fefe00" }
-                }
-            }
 
 
         }
