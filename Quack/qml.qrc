@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ui/main.qml</file>
+        <file>ui/MainForm.ui.qml</file>
+        <file>ui/AddAccountForm.ui.qml</file>
+        <file>ui/Preferences.qml</file>
+        <file>ui/PreferencesForm.ui.qml</file>
+    </qresource>
+</RCC>

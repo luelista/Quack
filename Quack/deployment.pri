@@ -4,8 +4,8 @@ QMAKE_LIBDIR += ../vendor/qxmpp/src
 QMAKE_RPATHDIR += $$OUT_PWD/../vendor/qxmpp/src
 
 INCLUDEPATH += $$QXMPP_INCLUDEPATH
-#LIBS += ../vendor/qxmpp/src/libqxmpp_d.a
-LIBS += -lqxmpp
+LIBS += ../vendor/qxmpp/src/libqxmpp_d.a
+#LIBS += -lqxmpp
 # xxxxx
 
 android-no-sdk {

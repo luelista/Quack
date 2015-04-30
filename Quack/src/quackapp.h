@@ -6,6 +6,7 @@
 #include <QtSql/QSqlDatabase>
 #include "accountmanager.h"
 #include "conversation.h"
+#include <QQmlApplicationEngine>
 
 #define SQLCHECK(query,ok) if (!ok) { qDebug() << "Database Error " << query.lastError().text() << " (Query was: " << query.lastQuery() << ")"; }
 #define SQLERROR(query,ok,errno) if (!ok) { \
@@ -29,7 +30,10 @@ public:
 
     Q_INVOKABLE Conversation* getConversationById(QString id);
 
+    QQmlApplicationEngine* m_engine;
+
 signals:
+
     void activeConversationChanged();
     void conversationsChanged();
 

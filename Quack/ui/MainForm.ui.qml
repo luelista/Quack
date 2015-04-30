@@ -147,8 +147,8 @@ Item {
 
                     TextField {
                         id: chatsendText
-                        text: ctrl.message
-                        placeholderText: "This wants to grow horizontally"
+                        text: ""
+                        placeholderText: "Send a message"
                         Layout.fillWidth: true
                         Layout.fillHeight: true
 

@@ -1,12 +1,9 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
+#include <QtQml>
 #include "quackapp.h"
 #include "jabberaccount.h"
 #include "conversation.h"
-#include <QtQml>
-//#include <QtDeclarative/QDeclarativeContext>
-//#include <QtDeclarative/QDeclarativeView>
-#include <QDeclarativeContext>
 
 QuackApp* APP;
 //max2@teamwiki.de
@@ -30,20 +27,16 @@ int main(int argc, char *argv[])
     qmlRegisterType<AccountManager>("net.luelistan.quack", 1, 0, "AccountManager");
     qmlRegisterType<QuackApp>("net.luelistan.quack", 1, 0, "QuackApp");
     qmlRegisterType<Conversation>("net.luelistan.quack", 1, 0, "Conversation");
-    //qmlRegisterSingletonType("net.luelistan.quack", 1, 0, "APP", quackapp_singleton_provider);
+    qmlRegisterSingletonType("net.luelistan.quack", 1, 0, "APP", quackapp_singleton_provider);
 
 
-    QDeclarativeView view;
-    view.rootContext()->setContextProperty("APP", &APP);
-
-    view.setSource(QUrl(QStringLiteral("qrc:/main.qml")));
-    view.show();
-
-    //QQmlApplicationEngine engine;
+    QQmlApplicationEngine engine;
+    APP->m_engine = &engine;
     //engine.globalObject().setProperty("APP", engine.newQObject(APP));
 
-    //engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    QQmlContext *ctxt = engine.rootContext();
+    ctxt->setContextProperty("app", APP);
 
-
-    //return app.exec();
+    return app.exec();
 }

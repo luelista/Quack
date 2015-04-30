@@ -2,6 +2,7 @@
 #include "accountmanager.h"
 #include <QtSql>
 #include <QDir>
+#include <QMetaObject>
 
 QuackApp::QuackApp(QObject *parent) : QObject(parent)
 {
@@ -79,4 +80,12 @@ void QuackApp::loadConversationsFromDatabase() {
     emit conversationsChanged();
 }
 
+
+/*
+    QObject *test = m_engine->findChild<QObject*>("test123");
+    QVariant returnedValue;
+    QMetaObject::invokeMethod(test, "blafoo",
+            Q_RETURN_ARG(QVariant, returnedValue),
+            Q_ARG(QVariant, "msg"));
+*/
 

@@ -10,15 +10,21 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
+    id: test123
 
     Connections {
-        target: getApp();
+        target: app
         onConversationsChanged: {
-            print("xxx")
+            print("onConversationsChanged slot was called!")
+
         }
         onActiveConversationChanged: {
             print ("yyy")
         }
+    }
+
+    function blafoo(x) {
+        print("Hallo "+x);
     }
 
     function getApp(){
@@ -100,6 +106,9 @@ ApplicationWindow {
         /*button1.onClicked: testSheet.show()
         button2.onClicked: messageDialog.show(qsTr("Button 2 pressed"))
         button3.onClicked: messageDialog.show(qsTr("Button 3 pressed"))*/
+        sendButton.onClicked: {
+            chatsendText.text = ""
+        }
     }
 
     MessageDialog {
