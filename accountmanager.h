@@ -20,6 +20,8 @@ public:
     Q_INVOKABLE int size();
     Q_INVOKABLE Account* get(int idx);
 
+    Q_INVOKABLE Account* getByAccountId(int rowId);
+
 
 signals:
     void accountsChanged();

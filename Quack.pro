@@ -6,7 +6,8 @@ SOURCES += main.cpp \
     accountmanager.cpp \
     quackapp.cpp \
     account.cpp \
-    jabberaccount.cpp
+    jabberaccount.cpp \
+    conversation.cpp
 
 RESOURCES += qml.qrc
 
@@ -20,4 +21,5 @@ HEADERS += \
     accountmanager.h \
     quackapp.h \
     account.h \
-    jabberaccount.h
+    jabberaccount.h \
+    conversation.h

@@ -33,7 +33,7 @@ ApplicationWindow {
             MenuItem {
                 text: "List"
                 onTriggered: {
-                    var am = APP.acctMan();
+                    var am = APP.accountManager;
                     for(var i = 0; i < am.size(); i++)
                         main.textArea1.text += am.get(i).proto() + " account: " + am.get(i).User + "\n";
                 }
@@ -41,7 +41,7 @@ ApplicationWindow {
             MenuItem {
                 text: "Go online"
                 onTriggered: {
-                    var am = APP.acctMan();
+                    var am = APP.accountManager;
                     for(var i = 0; i < am.size(); i++)
                         am.get(i).go_online();
                 }
@@ -81,7 +81,7 @@ ApplicationWindow {
             cancelButton.onClicked: addAccountSheet.close()
             connectButton.onClicked: {
                 print("Hello, world.")
-                var ok = APP.acctMan().createAccount("jabber", userid, password);
+                var ok = APP.accountManager.createAccount("jabber", userid, password);
                 if (ok) addAccountSheet.close(); else print("Error!");
 
             }

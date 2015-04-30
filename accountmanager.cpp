@@ -79,4 +79,11 @@ Account* AccountManager::get(int idx) {
     return this->accounts.at(idx);
 }
 
+Account* AccountManager::getByAccountId(int rowId) {
+    foreach(Account* a, this->accounts) {
+        if (a->m_rowId == rowId) return a;
+    }
+    return NULL;
+}
+
 
