@@ -10,3 +10,10 @@ Conversation::Conversation( QObject *parent) : QObject(parent)
 {
 }
 
+
+QString Conversation::displayName() { return m_displayName; }
+void Conversation::setDisplayName(QString value) {
+    m_displayName = value;
+    emit displayNameChanged();
+}
+

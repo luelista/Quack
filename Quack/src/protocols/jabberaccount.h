@@ -1,7 +1,7 @@
 #ifndef JABBERACCOUNT_H
 #define JABBERACCOUNT_H
 
-#include "account.h"
+#include "../account.h"
 #include "QXmppClient.h"
 #include "QXmppMessage.h"
 #include "QXmppRosterManager.h"

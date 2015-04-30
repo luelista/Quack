@@ -1,5 +1,5 @@
 #include "account.h"
-#include "jabberaccount.h"
+#include "protocols/jabberaccount.h"
 
 Account::Account(QObject *parent) : QObject(parent)
 {

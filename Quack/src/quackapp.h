@@ -29,6 +29,7 @@ public:
     Q_INVOKABLE Conversation* newConversation(Account* onAccount, QString id);
 
     Q_INVOKABLE Conversation* getConversationById(QString id);
+    Q_INVOKABLE QList<QObject*> getConversations();
 
     QQmlApplicationEngine* m_engine;
 
@@ -43,7 +44,7 @@ private:
     Conversation * m_activeConversation;
     AccountManager * m_accountManager;
     QSqlDatabase m_dataBase;
-    QHash<QString,Conversation*> m_conversations;
+    QHash<QString,QObject*> m_conversations;
 
     void initializeDatabase();
     void loadConversationsFromDatabase();

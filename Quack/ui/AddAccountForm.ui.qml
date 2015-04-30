@@ -124,6 +124,7 @@ Item {
         width: 108
         height: 27
         text: qsTr("OK")
+        isDefault: true
     }
     Button {
         id: cancelButton

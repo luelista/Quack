@@ -1,4 +1,4 @@
-include(vendor/qxmpp/qxmpp.pri)
+include(../vendor/qxmpp/qxmpp.pri)
 
 QMAKE_LIBDIR += ../vendor/qxmpp/src
 QMAKE_RPATHDIR += $$OUT_PWD/../vendor/qxmpp/src

@@ -23,7 +23,7 @@ public:
 
     QString errorMessage;
 
-    Q_INVOKABLE virtual QString proto() {return "";}
+    Q_INVOKABLE virtual QString proto() { return ""; }
     Q_INVOKABLE virtual void go_online() {}
     Q_INVOKABLE virtual void go_offline() {}
 
@@ -31,7 +31,7 @@ public:
 
 signals:
     void onlineStatusChanged(int online);
-
+    void messageReceived(QString form, QString message);
 
 public slots:
 };

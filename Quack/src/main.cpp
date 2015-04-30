@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QtQml>
 #include "quackapp.h"
-#include "jabberaccount.h"
+#include "protocols/jabberaccount.h"
 #include "conversation.h"
 
 QuackApp* APP;
@@ -27,16 +27,16 @@ int main(int argc, char *argv[])
     qmlRegisterType<AccountManager>("net.luelistan.quack", 1, 0, "AccountManager");
     qmlRegisterType<QuackApp>("net.luelistan.quack", 1, 0, "QuackApp");
     qmlRegisterType<Conversation>("net.luelistan.quack", 1, 0, "Conversation");
-    qmlRegisterSingletonType("net.luelistan.quack", 1, 0, "APP", quackapp_singleton_provider);
+    //qmlRegisterSingletonType("net.luelistan.quack", 1, 0, "APP", quackapp_singleton_provider);
 
 
     QQmlApplicationEngine engine;
     APP->m_engine = &engine;
     //engine.globalObject().setProperty("APP", engine.newQObject(APP));
 
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     QQmlContext *ctxt = engine.rootContext();
     ctxt->setContextProperty("app", APP);
+    engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
 
     return app.exec();
 }

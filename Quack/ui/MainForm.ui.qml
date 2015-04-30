@@ -10,7 +10,7 @@ Item {
     property alias chatview: chatview
     property alias chatsendText: chatsendText
     property alias sendButton: sendButton
-
+    property alias conferences: listView1
 
     SplitView {
         id: splitView1
@@ -20,6 +20,7 @@ Item {
         Item {
             id: item1
             width: 200
+            Layout.minimumWidth: 150
             ListView {
                 id: listView1
                 interactive: true
@@ -47,25 +48,17 @@ Item {
                         Rectangle {
                             width: 40
                             height: 40
-                            color: colorCode
+                            color: "#ffeeaa"
                         }
 
                         Text {
-                            text: name
+                            text: displayName
                             font.bold: true
                             anchors.verticalCenter: parent.verticalCenter
                         }
                     }
                 }
                 model: ListModel {
-                    ListElement {
-                        name: "Max Weller"
-                        colorCode: "#99aa33"
-                    }
-                    ListElement {
-                        name: "asdfasdfasdfasdf"
-                        colorCode: "#3399aa"
-                    }
                 }
             }
         }
@@ -81,6 +74,7 @@ Item {
         SplitView {
             orientation: Qt.Vertical
             Layout.fillWidth: true
+            Layout.minimumWidth: 250
 
             // Chat view
             Rectangle {

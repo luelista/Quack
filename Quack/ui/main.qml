@@ -12,11 +12,22 @@ ApplicationWindow {
     visible: true
     id: test123
 
+    function updateConversationList() {
+        print("onConversationsChanged slot was called!")
+        main.conferences.model.clear();
+        var x = app.getConversations();
+        for(var i in x) {
+            print(i+": "+x[i]+", "+x[i].displayName);
+            main.conferences.model.append(x[i]);
+        }
+        //main.conferences.update();
+
+    }
+
     Connections {
         target: app
         onConversationsChanged: {
-            print("onConversationsChanged slot was called!")
-
+            updateConversationList()
         }
         onActiveConversationChanged: {
             print ("yyy")
@@ -28,14 +39,9 @@ ApplicationWindow {
     }
 
     function getApp(){
-        console.log("returning app", APP)
-        return APP;
+        console.log("returning app", app)
+        return app;
     }
-
-    /*APP.onConversationChanged.connect(function() {
-
-    });*/
-
 
     menuBar: MenuBar {
         Menu {
@@ -63,7 +69,7 @@ ApplicationWindow {
                 text: "List"
                 shortcut: "F2"
                 onTriggered: {
-                    var am = APP.accountManager;
+                    var am = app.accountManager;
                     for(var i = 0; i < am.size(); i++)
                         main.textArea1.text += am.get(i).proto() + " account: " + am.get(i).User + "\n";
                 }
@@ -72,7 +78,7 @@ ApplicationWindow {
                 text: "Go online"
                 shortcut: "F1"
                 onTriggered: {
-                    var am = APP.accountManager;
+                    var am = app.accountManager;
                     for(var i = 0; i < am.size(); i++)
                         am.get(i).go_online();
                 }
@@ -94,7 +100,8 @@ ApplicationWindow {
             text: "Start conversation"
 
             onClicked: {
-                APP.newConversation(APP.accountManager.get(0), "hello@example.org");
+                joinChatroomForm.jid = "";
+                joinChatroomSheet.show();
             }
         }
         }
@@ -106,6 +113,7 @@ ApplicationWindow {
         /*button1.onClicked: testSheet.show()
         button2.onClicked: messageDialog.show(qsTr("Button 2 pressed"))
         button3.onClicked: messageDialog.show(qsTr("Button 3 pressed"))*/
+
         sendButton.onClicked: {
             chatsendText.text = ""
         }
@@ -124,6 +132,42 @@ ApplicationWindow {
 
 
     Window {
+        id: joinChatroomSheet
+        color: "#eeeeee"
+        flags: Qt.Dialog
+        minimumHeight: 140
+        maximumHeight: 140
+        height: 140
+        minimumWidth: 320
+        maximumWidth: 320
+        width: 320
+        modality: Qt.ApplicationModal
+        Action {
+            id: cancelAction
+            shortcut: "Esc"
+            onTriggered: joinChatroomSheet.close()
+        }
+        Action {
+            id: okAction
+            shortcut: "Return"
+            onTriggered: {
+                var name = joinChatroomForm.jid
+                print("name: "+name)
+                var conf = app.newConversation(app.accountManager.get(0), name);
+                conf.displayName = name;
+                joinChatroomSheet.close();
+                updateConversationList();
+            }
+        }
+
+        JoinChatroomForm {
+            id: joinChatroomForm
+            anchors.fill: parent
+            okButton.action: okAction
+        }
+    }
+
+    Window {
         id: addAccountSheet
         color: "#eeeeee"
         flags: "Sheet"
@@ -132,16 +176,16 @@ ApplicationWindow {
         modality: Qt.WindowModal
 
         Action {
-            id: cancelAction
+            id: cancelAction2
             shortcut: "Esc"
             onTriggered: addAccountSheet.close()
         }
         Action {
-            id: okAction
+            id: okAction2
             shortcut: "Enter"
             onTriggered: {
                 print("Hello, world.")
-                var ok = APP.accountManager.createAccount("jabber", userid, password);
+                var ok = app.accountManager.createAccount("jabber", userid, password);
                 if (ok) addAccountSheet.close(); else print("Error!");
 
             }
@@ -150,8 +194,8 @@ ApplicationWindow {
         AddAccountForm {
             id: addAccountForm
             anchors.fill: parent
-            cancelButton.action: cancelAction
-            connectButton.action: okAction
+            cancelButton.action: cancelAction2
+            connectButton.action: okAction2
         }
 
         function clearForm() {

@@ -25,12 +25,13 @@ QuackApp::QuackApp(QObject *parent) : QObject(parent)
 Conversation* QuackApp::newConversation(Account* onAccount, QString id) {
     Conversation* n = new Conversation(onAccount, id);
     this->m_conversations.insert(id, n);
+    printf("size: %d\n", this->m_conversations.values().size());
     emit conversationsChanged();
     return n;
 }
 
 Conversation* QuackApp::getConversationById(QString id) {
-    return this->m_conversations[id];
+    return (Conversation*)this->m_conversations[id];
 }
 
 Conversation* QuackApp::activeConversation() {
@@ -42,6 +43,10 @@ void QuackApp::setActiveConversation(Conversation* c) {
     emit activeConversationChanged();
 }
 
+QList<QObject*> QuackApp::getConversations() {
+    return m_conversations.values();
+}
+
 AccountManager * QuackApp::acctMan(void) {
     return this->m_accountManager;
 }
@@ -50,6 +55,8 @@ void QuackApp::initializeDatabase() {
     int ok;
     QSqlQuery q(this->m_dataBase);
     ok = q.exec("CREATE TABLE IF NOT EXISTS accounts (proto TEXT,userid TEXT, enabled INT,description TEXT,password TEXT,server TEXT, port INT);");
+    SQLCHECK(q, ok);
+    ok = q.exec("CREATE TABLE IF NOT EXISTS room (account_id INT, room TEXT,lastmessagedt TEXT, subject TEXT, do_join INT,display_name TEXT,password TEXT,notify INT, display_position INT);");
     SQLCHECK(q, ok);
     ok = q.exec("CREATE TABLE IF NOT EXISTS room (account_id INT, room TEXT,lastmessagedt TEXT, subject TEXT, do_join INT,display_name TEXT,password TEXT,notify INT, display_position INT);");
     SQLCHECK(q, ok);
