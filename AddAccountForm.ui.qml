@@ -3,8 +3,8 @@ import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.0
 
 Item {
-    width: 417
-    height: 300
+    width: 405
+    height: 270
 
     property alias cancelButton: cancelButton
     property alias connectButton: connectButton
@@ -14,8 +14,8 @@ Item {
     property alias port: portField.text
 
     Text {
-        x: 42
-        y: 42
+        x: 39
+        y: 23
         width: 102
         height: 14
         text: qsTr("Jabber ID:")
@@ -24,16 +24,17 @@ Item {
 
     TextField {
         id: useridField
-        x: 156
-        y: 36
+        x: 153
+        y: 17
         width: 220
         height: 26
+        focus: true
         placeholderText: qsTr("janedoe@example.org")
     }
 
     Text {
-        x: 42
-        y: 85
+        x: 39
+        y: 66
         width: 102
         height: 14
         text: qsTr("Password:")
@@ -42,8 +43,8 @@ Item {
 
     TextField {
         id: passwordField
-        x: 156
-        y: 79
+        x: 153
+        y: 60
         width: 220
         height: 26
         echoMode: 2
@@ -58,10 +59,10 @@ Item {
 
     GroupBox {
         id: groupBox1
-        x: 15
-        y: 117
+        x: 12
+        y: 98
         width: 383
-        height: 113
+        height: 116
         flat: false
         title: qsTr("Advanced Options  ")
 
@@ -118,16 +119,16 @@ Item {
 
     Button {
         id: connectButton
-        x: 260
-        y: 224
+        x: 257
+        y: 225
         width: 108
         height: 27
         text: qsTr("OK")
     }
     Button {
         id: cancelButton
-        x: 145
-        y: 224
+        x: 142
+        y: 225
         width: 108
         height: 27
         text: qsTr("Cancel")

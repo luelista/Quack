@@ -19,6 +19,7 @@ ApplicationWindow {
             }
             MenuItem {
                 text: qsTr("E&xit")
+                shortcut: "F4"
                 onTriggered: Qt.quit();
             }
         }
@@ -26,12 +27,14 @@ ApplicationWindow {
             title: qsTr("&Accounts")
             MenuItem {
                 text: "Add Account ..."
+                shortcut: "Ctrl++"
                 onTriggered: {
                     addAccountSheet.clearForm(); addAccountSheet.show();
                 }
             }
             MenuItem {
                 text: "List"
+                shortcut: "F2"
                 onTriggered: {
                     var am = APP.acctMan();
                     for(var i = 0; i < am.size(); i++)
@@ -40,6 +43,7 @@ ApplicationWindow {
             }
             MenuItem {
                 text: "Go online"
+                shortcut: "F1"
                 onTriggered: {
                     var am = APP.acctMan();
                     for(var i = 0; i < am.size(); i++)
@@ -47,6 +51,19 @@ ApplicationWindow {
                 }
             }
         }
+    }
+
+    toolBar: ToolBar {
+        height: 30
+        //RowLayout {
+            Button {
+                text: "Add account"
+
+                onClicked: {
+                    addAccountSheet.clearForm(); addAccountSheet.show();
+                }
+            }
+        //}
     }
 
     MainForm {
@@ -71,15 +88,21 @@ ApplicationWindow {
 
     Window {
         id: addAccountSheet
+        color: "#eeeeee"
         flags: "Sheet"
-        width: 450
-        height: 300
+        width: 405
+        height: 270
         modality: Qt.WindowModal
-        AddAccountForm {
-            id: addAccountForm
-            anchors.fill: parent
-            cancelButton.onClicked: addAccountSheet.close()
-            connectButton.onClicked: {
+
+        Action {
+            id: cancelAction
+            shortcut: "Esc"
+            onTriggered: addAccountSheet.close()
+        }
+        Action {
+            id: okAction
+            shortcut: "Enter"
+            onTriggered: {
                 print("Hello, world.")
                 var ok = APP.acctMan().createAccount("jabber", userid, password);
                 if (ok) addAccountSheet.close(); else print("Error!");
@@ -87,9 +110,18 @@ ApplicationWindow {
             }
         }
 
+        AddAccountForm {
+            id: addAccountForm
+            anchors.fill: parent
+            cancelButton.action: cancelAction
+            connectButton.action: okAction
+        }
+
         function clearForm() {
             addAccountForm.userid = ""; addAccountForm.password = ""; addAccountForm.server = ""; addAccountForm.port = "";
         }
+
+
     }
 
 
