@@ -18,8 +18,19 @@ QuackApp::QuackApp(QObject *parent) : QObject(parent)
     this->m_accountManager = new AccountManager();
     this->acctMan()->loadFromDatabase();
 
+    this->loadConversationsFromDatabase();
 }
 
+Conversation* QuackApp::newConversation(Account* onAccount, QString id) {
+    Conversation* n = new Conversation(onAccount, id);
+    this->m_conversations.insert(id, n);
+    emit conversationsChanged();
+    return n;
+}
+
+Conversation* QuackApp::getConversationById(QString id) {
+    return this->m_conversations[id];
+}
 
 Conversation* QuackApp::activeConversation() {
     return this->m_activeConversation;
@@ -65,6 +76,7 @@ void QuackApp::loadConversationsFromDatabase() {
         this->m_conversations.insert(id, con);
         qDebug() << a->description; // << a->userid;
     }
+    emit conversationsChanged();
 }
 
 

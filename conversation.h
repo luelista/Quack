@@ -7,6 +7,7 @@ class Conversation : public QObject
 {
     Q_OBJECT
 public:
+    Conversation(QObject *parent = 0);
     explicit Conversation(Account* account, QString id, QObject *parent = 0);
 
     Account* m_account;

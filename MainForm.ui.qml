@@ -20,58 +20,58 @@ Item {
         Item {
             id: item1
             width: 200
-                    ListView {
-                        id: listView1
-                        interactive: true
+            ListView {
+                id: listView1
+                interactive: true
+                anchors.fill: parent
+                width: 200; height: parent.height
+                focus: true
+                highlight: Rectangle { color: "lightsteelblue"; }
+                delegate: Item {
+                    x: 5
+                    height: 50
+                    width: parent.width
+
+                    MouseArea {
                         anchors.fill: parent
-                        width: 200; height: parent.height
-                        focus: true
-                        highlight: Rectangle { color: "lightsteelblue"; }
-                        delegate: Item {
-                            x: 5
-                            height: 50
-                            width: parent.width
-
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    listView1.currentIndex = index;
-                                    listView1.forceActiveFocus();
-                                }
-                            }
-                            Row {
-                                id: row1
-                                spacing: 10
-                                anchors.margins: 5
-                                anchors.fill: parent
-                                Rectangle {
-                                    width: 40
-                                    height: 40
-                                    color: colorCode
-                                }
-
-                                Text {
-                                    text: name
-                                    font.bold: true
-                                    anchors.verticalCenter: parent.verticalCenter
-                                }
-                            }
+                        onClicked: {
+                            listView1.currentIndex = index;
+                            listView1.forceActiveFocus();
                         }
-                        model: ListModel {
-                            ListElement {
-                                name: "Max Weller"
-                                colorCode: "#99aa33"
-                            }
-                            ListElement {
-                                name: "asdfasdfasdfasdf"
-                                colorCode: "#3399aa"
-                            }
+                    }
+                    Row {
+                        id: row1
+                        spacing: 10
+                        anchors.margins: 5
+                        anchors.fill: parent
+                        Rectangle {
+                            width: 40
+                            height: 40
+                            color: colorCode
+                        }
+
+                        Text {
+                            text: name
+                            font.bold: true
+                            anchors.verticalCenter: parent.verticalCenter
                         }
                     }
                 }
-
-
+                model: ListModel {
+                    ListElement {
+                        name: "Max Weller"
+                        colorCode: "#99aa33"
+                    }
+                    ListElement {
+                        name: "asdfasdfasdfasdf"
+                        colorCode: "#3399aa"
+                    }
+                }
+            }
         }
+
+
+
 
 
         // right

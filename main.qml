@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.1
 import net.luelistan.quack 1.0
 
 ApplicationWindow {
@@ -9,6 +10,26 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
+
+    Connections {
+        target: getApp();
+        onConversationsChanged: {
+            print("xxx")
+        }
+        onActiveConversationChanged: {
+            print ("yyy")
+        }
+    }
+
+    function getApp(){
+        console.log("returning app", APP)
+        return APP;
+    }
+
+    /*APP.onConversationChanged.connect(function() {
+
+    });*/
+
 
     menuBar: MenuBar {
         Menu {
@@ -55,15 +76,22 @@ ApplicationWindow {
 
     toolBar: ToolBar {
         height: 30
-        //RowLayout {
-            Button {
-                text: "Add account"
+        RowLayout {
+        Button {
+            text: "Add account"
 
-                onClicked: {
-                    addAccountSheet.clearForm(); addAccountSheet.show();
-                }
+            onClicked: {
+                addAccountSheet.clearForm(); addAccountSheet.show();
             }
-        //}
+        }
+        Button {
+            text: "Start conversation"
+
+            onClicked: {
+                APP.newConversation(APP.accountManager.get(0), "hello@example.org");
+            }
+        }
+        }
     }
 
     MainForm {

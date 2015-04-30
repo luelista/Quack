@@ -25,8 +25,13 @@ public:
     Q_INVOKABLE Conversation* activeConversation();
     Q_INVOKABLE void setActiveConversation(Conversation* c);
 
+    Q_INVOKABLE Conversation* newConversation(Account* onAccount, QString id);
+
+    Q_INVOKABLE Conversation* getConversationById(QString id);
+
 signals:
     void activeConversationChanged();
+    void conversationsChanged();
 
 public slots:
 

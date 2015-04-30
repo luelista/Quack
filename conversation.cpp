@@ -6,3 +6,7 @@ Conversation::Conversation(Account* account, QString id, QObject *parent) : QObj
     this->m_id = id;
 }
 
+Conversation::Conversation( QObject *parent) : QObject(parent)
+{
+}
+
