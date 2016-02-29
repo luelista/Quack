@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/duckling.ico</file>
+    </qresource>
+</RCC>
